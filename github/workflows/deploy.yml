@@ -74,7 +74,7 @@ jobs:
        run: |
          JAR_FILE=$(ls usuarios-api-*.jar | head -n 1)
          echo "Arquivo JAR baixado: $JAR_FILE"
-         mv $JAR_FILE usuarios-api-pipeline.jar
+         mv "$JAR_FILE" usuarios-api-pipeline.jar
      - name: Limpar arquivos temporários
        run: rm -f *.jar
 
