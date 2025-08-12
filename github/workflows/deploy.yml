@@ -72,7 +72,7 @@ jobs:
        run: ls -la
      - name: Renomear arquivo JAR
        run: |
-         JAR_FILE=$(ls usuarios-api-*.jar)
+         JAR_FILE=$(ls usuarios-api-*.jar | head -n 1)
          echo "Arquivo JAR baixado: $JAR_FILE"
          mv $JAR_FILE usuarios-api-pipeline.jar
      - name: Limpar arquivos temporários
