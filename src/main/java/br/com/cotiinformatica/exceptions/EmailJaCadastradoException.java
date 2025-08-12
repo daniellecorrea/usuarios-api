@@ -1,9 +1,5 @@
 package br.com.cotiinformatica.exceptions;
-
-
 public class EmailJaCadastradoException extends RuntimeException {
-
-	
 	private static final long serialVersionUID = 1L;
 	private String email;
 	
@@ -16,4 +12,5 @@ public class EmailJaCadastradoException extends RuntimeException {
 		return "O email '" + email + "' já está cadastrado. Tente outro.";
 	}
 }
+
 

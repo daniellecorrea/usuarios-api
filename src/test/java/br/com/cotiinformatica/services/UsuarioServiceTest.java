@@ -5,20 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
 import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-
 import com.github.javafaker.Faker;
-
 import br.com.cotiinformatica.components.JwtBearerComponent;
 import br.com.cotiinformatica.dtos.AutenticarUsuarioRequest;
 import br.com.cotiinformatica.dtos.CriarUsuarioRequest;
@@ -26,8 +22,6 @@ import br.com.cotiinformatica.entities.Usuario;
 import br.com.cotiinformatica.exceptions.AcessoNegadoException;
 import br.com.cotiinformatica.exceptions.EmailJaCadastradoException;
 import br.com.cotiinformatica.repositories.UsuarioRepository;
-
-
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UsuarioServiceTest {
 	//Atributos que são mockados no teste
@@ -112,9 +106,7 @@ public class UsuarioServiceTest {
 			);
 		
 		//Verificar a mensagem de erro obtida
-		assertEquals("O email " + request.getEmail() + " já está cadastrado. Tente outro.", exception.getMessage());
-
-
+		assertEquals("O email '" + request.getEmail() + "' já está cadastrado. Tente outro.", exception.getMessage());
 	}
 	
 	@Test
@@ -176,21 +168,18 @@ public class UsuarioServiceTest {
 		request.setSenha(faker.internet().password());
 		
 		when(usuarioRepository.findByEmailAndSenha(request.getEmail(), request.getSenha()))
-		.thenReturn(Optional.empty());
-	
-	//Executando a autenticação do usuário e verificar se foi retornado uma exceção
-	var exception = assertThrows(
-			AcessoNegadoException.class, () -> {
-				//Ação que deverá retornar a exceção
-				usuarioService.autenticarUsuario(request);
-			}
-		);
-			
-	//Verificar a mensagem de erro obtida
-	assertEquals("Acesso negado. Usuário inválido.", exception.getMessage());
+			.thenReturn(Optional.empty());
+		
+		//Executando a autenticação do usuário e verificar se foi retornado uma exceção
+		var exception = assertThrows(
+				AcessoNegadoException.class, () -> {
+					//Ação que deverá retornar a exceção
+					usuarioService.autenticarUsuario(request);
+				}
+			);
+				
+		//Verificar a mensagem de erro obtida
+		assertEquals("Acesso negado. Usuário inválido.", exception.getMessage());
 	}
-
 }
-
-
 
